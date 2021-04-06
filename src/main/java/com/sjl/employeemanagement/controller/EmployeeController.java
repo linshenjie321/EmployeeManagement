@@ -1,4 +1,4 @@
-package com.scotiabank.dosl.userservice.controller;
+package com.sjl.employeemanagement.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.scotiabank.dosl.userservice.entities.Employee;
-import com.scotiabank.dosl.userservice.repository.EmployeeRepository;
+import com.sjl.employeemanagement.entities.Employee;
+import com.sjl.employeemanagement.repository.EmployeeRepository;
 
 @RestController
 public class EmployeeController {

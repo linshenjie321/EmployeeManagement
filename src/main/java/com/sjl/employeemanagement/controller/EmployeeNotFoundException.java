@@ -1,4 +1,4 @@
-package com.scotiabank.dosl.userservice.controller;
+package com.sjl.employeemanagement.controller;
 
 public class EmployeeNotFoundException extends RuntimeException {
 

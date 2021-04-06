@@ -1,4 +1,4 @@
-package com.scotiabank.dosl.userservice.entities;
+package com.sjl.employeemanagement.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

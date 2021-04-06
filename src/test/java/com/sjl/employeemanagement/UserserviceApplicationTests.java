@@ -1,4 +1,4 @@
-package com.scotiabank.dosl.userservice;
+package com.sjl.employeemanagement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

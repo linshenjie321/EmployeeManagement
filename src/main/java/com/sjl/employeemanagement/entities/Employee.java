@@ -4,14 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@ApiModel(description = "the Employee model which contains information about one particular employee")
 public class Employee {
-
+	
+	@ApiModelProperty(value = "the primary identifier of an employee")
 	private @Id @GeneratedValue Long id;
 	private String firstName;
 	private String middleName;

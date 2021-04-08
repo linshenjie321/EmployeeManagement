@@ -15,6 +15,7 @@ import com.sjl.employeemanagement.entities.Employee;
 import com.sjl.employeemanagement.repository.EmployeeRepository;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/employees")
@@ -41,7 +42,7 @@ public class EmployeeController {
 	@GetMapping("/{id}")
 	@ApiOperation(value = "returns one employee by the employee ID",
 			response =Employee.class)
-	public Employee one(@PathVariable Long id) {
+	public Employee one(@ApiParam(value = "the id of the employee", required = true) @PathVariable Long id) {
 		return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
 	}
 

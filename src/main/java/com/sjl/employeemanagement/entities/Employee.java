@@ -4,16 +4,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @ApiModel(description = "the Employee model which contains information about one particular employee")
-public class Employee {
+public class Employee extends RepresentationModel<Employee> {
 	
 	@ApiModelProperty(value = "the primary identifier of an employee")
 	private @Id @GeneratedValue Long id;

@@ -37,5 +37,24 @@ public class EmployeeManagementBO {
 
 		return listOfEmployeeDtos;
 	}
+	
+	public EmployeeDTO saveOrUpdateEmployee(EmployeeDTO employeeDto) {
+		Employee employeeEntity = null;
+		if(employeeDto.getId() == null || employeeRepository.findById(employeeDto.getId()) == null) {
+			employeeEntity = new Employee();
+		}else {
+			employeeEntity = employeeRepository.findById(employeeDto.getId()).get();
+		}
+		employeeEntity.setEmail(employeeDto.getEmail());
+		employeeEntity.setFirstName(employeeDto.getFirstName());
+		employeeEntity.setLastName(employeeDto.getLastName());
+		employeeEntity.setMiddleName(employeeDto.getMiddleName());
+		employeeEntity.setPhoneNumber(employeeDto.getPhoneNumber());
+		employeeEntity.setPreferredName(employeeDto.getPreferredName());
+		employeeEntity.setRole(employeeDto.getRole());
+		employeeEntity = employeeRepository.save(employeeEntity);
+		employeeDto.setId(employeeEntity.getId());
+		return employeeDto;
+	}
 
 }

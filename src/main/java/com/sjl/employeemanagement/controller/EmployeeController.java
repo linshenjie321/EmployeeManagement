@@ -54,8 +54,8 @@ public class EmployeeController {
 	@PostMapping("/")
 	@ApiOperation(value = "creates a new employee",
 		response =Employee.class)
-	public Employee newEmployee(@RequestBody Employee newEmployee) {
-		return employeeRepository.save(newEmployee);
+	public EmployeeDTO newEmployee(@RequestBody EmployeeDTO newEmployee) {
+		return employeeManagementBO.saveOrUpdateEmployee(newEmployee);
 	}
 
 	@GetMapping("/{id}")

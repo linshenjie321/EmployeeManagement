@@ -56,5 +56,9 @@ public class EmployeeManagementBO {
 		employeeDto.setId(employeeEntity.getId());
 		return employeeDto;
 	}
+	
+	public void deleteEmployee(Long id) {
+		employeeRepository.deleteById(id);
+	}
 
 }

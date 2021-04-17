@@ -87,6 +87,6 @@ public class EmployeeController {
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "deletes an existing employee")
 	public void deleteEmployee(@PathVariable Long id) {
-		employeeRepository.deleteById(id);
+		employeeManagementBO.deleteEmployee(id);
 	}
 }

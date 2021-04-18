@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.sjl.employeemanagement.controller.EmployeeNotFoundException;
 import com.sjl.employeemanagement.dto.EmployeeDTO;
 import com.sjl.employeemanagement.entities.Employee;
 import com.sjl.employeemanagement.repository.EmployeeRepository;
@@ -18,24 +19,33 @@ public class EmployeeManagementBO {
 		this.employeeRepository = employeeRepository;
 	}
 	
+	public EmployeeDTO findById(Long id) {
+		Employee employeeEntity = employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+		return transformToEmployeeDTO(employeeEntity);
+	}
+	
 	public List<EmployeeDTO> fetchAllEmployees() {
 		List<Employee> listOfEmployees = employeeRepository.findAll();
 
 		List<EmployeeDTO> listOfEmployeeDtos = new ArrayList<>();
 		for (Employee e : listOfEmployees) {
-			EmployeeDTO eDto = new EmployeeDTO();
-			eDto.setEmail(e.getEmail());
-			eDto.setFirstName(e.getFirstName());
-			eDto.setId(e.getId());
-			eDto.setLastName(e.getLastName());
-			eDto.setMiddleName(e.getMiddleName());
-			eDto.setPhoneNumber(e.getPhoneNumber());
-			eDto.setPreferredName(e.getPreferredName());
-			eDto.setRole(e.getRole());
-			listOfEmployeeDtos.add(eDto);
+			listOfEmployeeDtos.add(transformToEmployeeDTO(e));
 		}
 
 		return listOfEmployeeDtos;
+	}
+	
+	private EmployeeDTO transformToEmployeeDTO (Employee e) {
+		EmployeeDTO eDto = new EmployeeDTO();
+		eDto.setEmail(e.getEmail());
+		eDto.setFirstName(e.getFirstName());
+		eDto.setId(e.getId());
+		eDto.setLastName(e.getLastName());
+		eDto.setMiddleName(e.getMiddleName());
+		eDto.setPhoneNumber(e.getPhoneNumber());
+		eDto.setPreferredName(e.getPreferredName());
+		eDto.setRole(e.getRole());
+		return eDto;
 	}
 	
 	public EmployeeDTO saveOrUpdateEmployee(EmployeeDTO employeeDto) {

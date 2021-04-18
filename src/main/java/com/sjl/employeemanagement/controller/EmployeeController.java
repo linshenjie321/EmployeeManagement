@@ -1,8 +1,8 @@
 package com.sjl.employeemanagement.controller;
 
-import java.util.List;
-
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sjl.employeemanagement.bo.EmployeeManagementBO;
 import com.sjl.employeemanagement.dto.EmployeeDTO;
-import com.sjl.employeemanagement.entities.Employee;
-import com.sjl.employeemanagement.repository.EmployeeRepository;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,14 +31,8 @@ import io.swagger.annotations.ApiParam;
 @EnableHypermediaSupport(type = HypermediaType.HAL)
 public class EmployeeController {
 	
-	private final EmployeeRepository employeeRepository;
-	
 	@Autowired
 	private EmployeeManagementBO employeeManagementBO;
-
-	EmployeeController(EmployeeRepository employeeRepository) {
-		this.employeeRepository = employeeRepository;
-	}
 
 	@GetMapping("/")
 	@ApiOperation(value = "creates a new employee")
@@ -53,35 +45,24 @@ public class EmployeeController {
 
 	@PostMapping("/")
 	@ApiOperation(value = "creates a new employee",
-		response =Employee.class)
+		response =EmployeeDTO.class)
 	public EmployeeDTO newEmployee(@RequestBody EmployeeDTO newEmployee) {
 		return employeeManagementBO.saveOrUpdateEmployee(newEmployee);
 	}
 
 	@GetMapping("/{id}")
 	@ApiOperation(value = "returns one employee by the employee ID",
-			response =Employee.class)
-	public Employee one(@ApiParam(value = "the id of the employee", required = true) @PathVariable Long id) {
-		return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+			response =EmployeeDTO.class)
+	public EmployeeDTO one(@ApiParam(value = "the id of the employee", required = true) @PathVariable Long id) {
+		return employeeManagementBO.findById(id);
 	}
 
 	@PutMapping("/{id}")
 	@ApiOperation(value = "updates an existing employee, if employee does not exist, it will create one",
-		response =Employee.class)
-	public Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
-		return employeeRepository.findById(id).map(employee -> {
-			employee.setFirstName(newEmployee.getFirstName());
-			employee.setEmail(newEmployee.getEmail());
-			employee.setLastName(newEmployee.getLastName());
-			employee.setMiddleName(newEmployee.getMiddleName());
-			employee.setPhoneNumber(newEmployee.getPhoneNumber());
-			employee.setPreferredName(newEmployee.getPreferredName());
-			employee.setRole(newEmployee.getRole());
-			return employeeRepository.save(employee);
-		}).orElseGet(() -> {
-			newEmployee.setId(id);
-			return employeeRepository.save(newEmployee);
-		});
+		response =EmployeeDTO.class)
+	public EmployeeDTO replaceEmployee(@RequestBody EmployeeDTO employee, @PathVariable Long id) {
+		employee.setId(id);
+		return employeeManagementBO.saveOrUpdateEmployee(employee);
 	}
 
 	@DeleteMapping("/{id}")

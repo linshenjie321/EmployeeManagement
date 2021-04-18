@@ -33,6 +33,9 @@ public class EmployeeController {
 	
 	@Autowired
 	private EmployeeManagementBO employeeManagementBO;
+	
+	@Autowired
+	private EmployeeValidator employeeValidator;
 
 	@GetMapping("/")
 	@ApiOperation(value = "creates a new employee")
@@ -47,6 +50,7 @@ public class EmployeeController {
 	@ApiOperation(value = "creates a new employee",
 		response =EmployeeDTO.class)
 	public EmployeeDTO newEmployee(@RequestBody EmployeeDTO newEmployee) {
+		employeeValidator.validateEmployeeDTO(newEmployee);
 		return employeeManagementBO.saveOrUpdateEmployee(newEmployee);
 	}
 

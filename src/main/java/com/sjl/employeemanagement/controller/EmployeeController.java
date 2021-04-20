@@ -4,6 +4,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
@@ -49,7 +51,7 @@ public class EmployeeController {
 	@PostMapping("/")
 	@ApiOperation(value = "creates a new employee",
 		response =EmployeeDTO.class)
-	public EmployeeDTO newEmployee(@RequestBody EmployeeDTO newEmployee) {
+	public EmployeeDTO newEmployee(@Valid @RequestBody EmployeeDTO newEmployee) {
 		employeeValidator.validateEmployeeDTO(newEmployee);
 		return employeeManagementBO.saveOrUpdateEmployee(newEmployee);
 	}

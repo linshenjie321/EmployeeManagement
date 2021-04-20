@@ -1,5 +1,7 @@
 package com.sjl.employeemanagement.dto;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.hateoas.RepresentationModel;
 
 import com.sjl.employeemanagement.entities.Employee;
@@ -17,7 +19,9 @@ public class EmployeeDTO extends RepresentationModel<Employee> {
 	
 	@ApiModelProperty(value = "the primary identifier of an employee")
 	private Long id;
+	@NotBlank(message = "firstName is required from validator")
 	private String firstName;
+	@NotBlank(message = "middleName is required from validator")
 	private String middleName;
 	private String lastName;
 	private String preferredName;

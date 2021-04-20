@@ -48,7 +48,7 @@ public class EmployeeController {
 		return result;
 	}
 
-	@PostMapping("/")
+	@PostMapping("/newEmployee")
 	@ApiOperation(value = "creates a new employee",
 		response =EmployeeDTO.class)
 	public EmployeeDTO newEmployee(@Valid @RequestBody EmployeeDTO newEmployee) {

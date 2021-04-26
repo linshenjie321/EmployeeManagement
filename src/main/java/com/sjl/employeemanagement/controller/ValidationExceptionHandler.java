@@ -16,6 +16,7 @@ public class ValidationExceptionHandler {
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
+	//note that if @ResponseBody is not annotated here, you may get weird error like 404 or 401
 	@ResponseBody
 	public Map<String, String> handleValidationExceptions(
 	  MethodArgumentNotValidException ex) {

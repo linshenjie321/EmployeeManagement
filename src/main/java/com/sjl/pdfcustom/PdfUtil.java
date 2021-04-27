@@ -12,9 +12,6 @@ public class PdfUtil {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		PDFMergerUtility pdfboxMerger = new PDFMergerUtility();
-//		InputStream file1 = PdfUtil.class.getClassLoader().getResourceAsStream("C:\\Users\\Cometstrike\\jee-2021-03-workspace\\userservice\\src\\main\\resources\\static\\AnVu - Letter of Employment.pdf");
-//		InputStream file2 = PdfUtil.class.getClassLoader().getResourceAsStream("C:\\Users\\Cometstrike\\jee-2021-03-workspace\\userservice\\src\\main\\resources\\static\\AnVu - T4.pdf");
-		
 		File file1 = new File("location absolute path");
 		File file2 = new File("location absolute path");
 		pdfboxMerger.addSource(file1);

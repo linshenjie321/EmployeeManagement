@@ -15,11 +15,11 @@ public class FileMoveUtil {
 	public static void main(String[] args) throws IOException {
 		
 		String baseFolder = "G:\\NEW PROJECT";
-		String fileFolder = "G:\\NEW PROJECT\\ILE - Class Modification and Closure Letters";
+		String fileFolder = "G:\\NEW PROJECT\\ILE - Modification - Active Classes";
 		
 		File baseFolderF = new File(baseFolder);
 		File folder = new File(fileFolder);
-		Collection<File> fileCollections = FileUtils.listFiles(folder, new String[] { "pdf" , "docx"}, false);
+		Collection<File> fileCollections = FileUtils.listFiles(folder, new String[] { "doc" , "msg", "PNG", "JPG", "TIF"}, false);
 
 		FileFilter fileFilter = new FileFilter() {
 			public boolean accept(File file) {
@@ -52,7 +52,7 @@ public class FileMoveUtil {
 								String newFileName = baseFolder + "\\" + eachfolder.getName() + "\\" + file.getName();
 								System.out.println("moving ||" + file.getName() + "|| to ||" + newFileName + "||");
 								File newFile = new File(newFileName);
-//								FileUtils.moveFile(file, newFile);
+								FileUtils.moveFile(file, newFile);
 								break;
 							} 
 						}
@@ -63,7 +63,7 @@ public class FileMoveUtil {
 						String newFileName = baseFolder + "\\" + extractedNumberName + " - MODIFICATIONS" + "\\" + file.getName();
 						System.out.println("New File will be at ||" + newFileName + "||");
 						File newFile = new File(newFileName);
-//						FileUtils.moveFile(file, newFile);
+						FileUtils.moveFile(file, newFile);
 					}
 				}else {
 					System.out.println("-------------------------------------------");

@@ -14,7 +14,32 @@ public class FileMoveUtil {
 		
 //		step2(fileCollections);
 		
-		String baseFolder = "G:\\NEW PROJECT";
+//		step3();
+	}
+	
+	private static Collection<File> step1() {
+		File folder = new File("G:\\NEW PROJECT");
+		Collection<File> fileCollections = FileUtils.listFiles(folder, new String[] {"pdf", "docx"}, true);
+		System.out.println(fileCollections.size() + " files found");
+		return fileCollections;
+	}
+	
+	private static void step2(Collection<File> fileCollections) {
+		for (File file : fileCollections) {
+		    if (file.isFile()) {
+		        File newFile = new File("G:\\NEW PROJECT\\" + file.getName());
+		        try {
+		            FileUtils.copyFile(file, newFile);
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        System.out.println("finished copying " + file.getName());
+		    }
+		}
+	}
+	
+	private static void step3() throws IOException {
+String baseFolder = "G:\\NEW PROJECT";
 		
 		File folder = new File(baseFolder);
 		Collection<File> fileCollections = FileUtils.listFiles(folder, new String[] {"pdf"}, false);
@@ -39,27 +64,6 @@ public class FileMoveUtil {
 		        	System.out.println("no folder found for " + file.getName());
 		        }
 		        
-		    }
-		}
-	}
-	
-	private static Collection<File> step1() {
-		File folder = new File("G:\\NEW PROJECT");
-		Collection<File> fileCollections = FileUtils.listFiles(folder, new String[] {"pdf"}, true);
-		System.out.println(fileCollections.size() + " files found");
-		return fileCollections;
-	}
-	
-	private static void step2(Collection<File> fileCollections) {
-		for (File file : fileCollections) {
-		    if (file.isFile()) {
-		        File newFile = new File("G:\\NEW PROJECT\\" + file.getName());
-		        try {
-		            FileUtils.copyFile(file, newFile);
-		        } catch (IOException e) {
-		            e.printStackTrace();
-		        }
-		        System.out.println("finished copying " + file.getName());
 		    }
 		}
 	}

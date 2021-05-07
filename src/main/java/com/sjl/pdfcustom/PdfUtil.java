@@ -24,11 +24,11 @@ public class PdfUtil {
 	
 	private static void pdfMergerUtilMerge() throws IOException {
 		PDFMergerUtility pdfboxMerger = new PDFMergerUtility();
-		File file1 = new File("absolute location 1");
-		File file2 = new File("absolute location 2");
+		File file1 = new File("");
+		File file2 = new File("");
 		pdfboxMerger.addSource(file1);
 		pdfboxMerger.addSource(file2);
-		pdfboxMerger.setDestinationFileName("absolute location destination");
+		pdfboxMerger.setDestinationFileName("");
 		pdfboxMerger.mergeDocuments();
 	}
 	

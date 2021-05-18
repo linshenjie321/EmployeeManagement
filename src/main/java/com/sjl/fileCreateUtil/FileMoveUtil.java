@@ -14,13 +14,13 @@ public class FileMoveUtil {
 
 	public static void main(String[] args) throws IOException {
 		
-		String baseFolder = "G:\\NEW PROJECT";
-		String fileFolder = "G:\\NEW PROJECT\\ILE - Modification - Active Classes";
+		String baseFolder = "G:\\NEW PROJECT (4)";
+		String fileFolder = "G:\\NEW PROJECT (4)\\CC10 Closure Letter - May 18";
 		
 		File baseFolderF = new File(baseFolder);
 		File folder = new File(fileFolder);
-		Collection<File> fileCollections = FileUtils.listFiles(folder, new String[] { "doc" , "msg", "PNG", "JPG", "TIF"}, false);
-
+		Collection<File> fileCollections = FileUtils.listFiles(folder, new String[] {"pdf"}, false);
+		System.out.println(fileCollections.size() + " pdf files found...");
 		FileFilter fileFilter = new FileFilter() {
 			public boolean accept(File file) {
 				return file.isDirectory();
@@ -38,6 +38,7 @@ public class FileMoveUtil {
 		System.out.println(filterNumberFolderNameList.size() + " folders found...");
 		System.out.println(filterNumberFolderNameList);
 		
+		List<String> filesWithNoFolder = new ArrayList<>();
 
 		for (File file : fileCollections) {
 			if (file.isFile()) {
@@ -49,7 +50,7 @@ public class FileMoveUtil {
 						for (File eachfolder : foldersArray) {
 							String folderNumberName = eachfolder.getName().replaceAll("[^0-9]", "");
 							if (StringUtils.equals(extractedNumberName, folderNumberName)) {
-								String newFileName = baseFolder + "\\" + eachfolder.getName() + "\\" + file.getName();
+								String newFileName = baseFolder + "\\" + eachfolder.getName() + "\\" +  "CC10 - " +file.getName();
 								System.out.println("moving ||" + file.getName() + "|| to ||" + newFileName + "||");
 								File newFile = new File(newFileName);
 								FileUtils.moveFile(file, newFile);
@@ -59,11 +60,12 @@ public class FileMoveUtil {
 					}else {
 						System.out.println("-------------------------------------------");
 						System.out.println("did not found folder for number - " + extractedNumberName);
-						System.out.println("creating folder for " + file.getName());
-						String newFileName = baseFolder + "\\" + extractedNumberName + " - MODIFICATIONS" + "\\" + file.getName();
-						System.out.println("New File will be at ||" + newFileName + "||");
-						File newFile = new File(newFileName);
-						FileUtils.moveFile(file, newFile);
+						filesWithNoFolder.add(extractedNumberName);
+//						System.out.println("creating folder for " + file.getName());
+//						String newFileName = baseFolder + "\\" + extractedNumberName + " - MODIFICATIONS" + "\\" + file.getName();
+//						System.out.println("New File will be at ||" + newFileName + "||");
+//						File newFile = new File(newFileName);
+//						FileUtils.moveFile(file, newFile);
 					}
 				}else {
 					System.out.println("-------------------------------------------");
@@ -71,7 +73,7 @@ public class FileMoveUtil {
 				}
 			}
 		}
-		
+		System.out.println(filesWithNoFolder.size() + " files have no folders");
 	}
 
 	
